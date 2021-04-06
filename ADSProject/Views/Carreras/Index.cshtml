@@ -1,0 +1,53 @@
+﻿@using ADSProject.Utilities
+@model IEnumerable<ADSProject.Models.Carrera>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de Carreras</h2>
+
+<p>
+    @Html.ActionLink(" Crear", "Form", new { operacion = Operacion.insertar }, new { @class = "btn btn-primary glyphicon glyphicon-plus" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+        <th>
+            @Html.DisplayNameFor(model => model.codigo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            Opciones
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.id)
+            </td>
+            <td>
+            <td>
+                @Html.DisplayFor(modelItem => item.codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Form", new { id = item.id, operacion = Operacion.modificar}, new { @class = "btn btn-warning glyphicon glyphicon-edit" }) 
+                @Html.ActionLink("Ver", "Form", new { id = item.id, operacion = Operacion.ver}, new { @class = "btn btn-info glyphicon glyphicon-eye-open" })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id, operacion = Operacion.eliminar}, new { @class = "btn btn-danger glyphicon glyphicon-remove", onClick = "return confirm('¿Realmente desea eliminar este registro?')" })
+            </td>
+        </tr>
+    }
+
+</table>
